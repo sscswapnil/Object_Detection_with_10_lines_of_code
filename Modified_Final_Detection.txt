@@ -1,0 +1,101 @@
+
+
+# Must know Detail Before Starting Project
+
+Normal laptop wont Work fine for deep learning. Deep learning required GPU Processor .... 
+But Tensor flow  help to convert CPU to GPU at some extend
+
+We already have one environment in the jupyter notebook which fills with the other library so
+its difficult to add tensorflow in it... So we have to creat new environment
+
+# Craet New Environment
+
+First open powershell of anaconda and run below cmd
+
+conda create -n DeepLearning_cpu pip python=3.6    #it Will creat new Environment DeepLearning_cpu with python version 3.6
+
+# Activate that Environment
+
+activate DeepLearning_cpu
+
+# To activate and Dactivate environment Following Command will be helpful
+
+conda activate DeepLearning_cpu        # Activate
+
+conda deactivate                       # Deactivate
+
+###################################################################################################################################
+
+#### Install required packages
+
+2. Install the following dependencies via conda (pip commands are not working which provided on internet):
+
+i. TensorFlow
+
+   To install this package with conda run one of the following:
+
+   conda install -c conda-forge tensorflow         ##### Use tensorflow==1.9
+   conda install -c conda-forge/label/broken tensorflow
+   conda install -c conda-forge/label/cf201901 tensorflow 
+
+ii. OpenCV
+
+  To install this package with conda run one of the following:
+
+  conda install -c conda-forge opencv
+  conda install -c conda-forge/label/gcc7 opencv
+  conda install -c conda-forge/label/broken opencv
+  conda install -c conda-forge/label/cf201901 opencv 
+
+iii. Keras
+
+  To install this package with conda run one of the following:
+
+  conda install -c conda-forge keras
+  conda install -c conda-forge/label/broken keras
+  conda install -c conda-forge/label/cf201901 keras 
+
+iv. ImageAI
+ 
+  pip3 install imageai --upgrade     ##### pip install imageai --upgrade (this Pip Command Works fine Dont worry)
+
+
+3) Download the RetinaNet model file that will be used for object detection via this link
+
+https://github.com/OlafenwaMoses/ImageAI/releases/download/1.0/resnet50_coco_best_v2.0.1.h5
+
+# Paste this file and Image.jpg file in python working directories
+
+# Creat python file in created environment (jupyter notebook)
+
+# Open jupyter notebook from DeepLearning_cpu environment from anaconda power shell
+
+  FinalDetection.py    # Name of my created file
+
+# Run the following code for object detection
+
+=========================================================================================================================================================================
+
+  from imageai.Detection import ObjectDetection
+  import os
+
+  execution_path = os.getcwd()
+  
+  detector = ObjectDetection()
+  detector.setModelTypeAsRetinaNet()
+  detector.setModelPath( os.path.join(execution_path , "resnet50_coco_best_v2.0.1.h5"))
+  detector.loadModel()
+  detections = detector.detectObjectsFromImage(input_image=os.path.join(execution_path , "image.jpg"), output_image_path=os.path.join(execution_path , "imagenew.jpg"))
+
+  for eachObject in detections:
+      print(eachObject["name"] , " : " , eachObject["percentage_probability"] ) 
+
+=========================================================================================================================================================================
+
+# Check the file extension some times file extension will be jpeg and in progran we have jpg so error will occure .. so deal with it by giving same extension as 'image'.jpeg
+
+# Same process works fine for linux operating system also
+
+THANK YOU SSC
+
+GITHUB:- sscswapnil
